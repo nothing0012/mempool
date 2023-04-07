@@ -79,7 +79,6 @@ export interface TransactionExtended extends IEsploraApi.Transaction {
   descendants?: Ancestor[];
   bestDescendant?: BestDescendant | null;
   cpfpChecked?: boolean;
-  deleteAfter?: number;
 }
 
 export interface AuditTransaction {

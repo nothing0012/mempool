@@ -527,8 +527,9 @@ class Blocks {
     return await BlocksRepository.$validateChain();
   }
 
-  public async $updateBlocks() {
+  public async $updateBlocks(): Promise<number> {
     let fastForwarded = false;
+    let handledBlocks = 0;
     const blockHeightTip = await bitcoinApi.$getBlockHeightTip();
 
     if (this.blocks.length === 0) {
@@ -665,7 +666,11 @@ class Blocks {
 
       // wait for pending async callbacks to finish
       await Promise.all(callbackPromises);
+
+      handledBlocks++;
     }
+
+    return handledBlocks;
   }
 
   /**
